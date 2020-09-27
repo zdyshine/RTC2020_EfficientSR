@@ -10,9 +10,9 @@
 3. 最终使用MSE 作为loss训练，追求极致的PSNR指标  
  
 ## 代码说明
-文件夹的功能如下：
---pretrained-model	存放训练好的模型  
---datasets	存放训练数据集和测试集，选手提交时不要存放数据，但该文件夹要有，训练和测试过程中，从该文件夹读取数据  
+文件夹的功能如下：  
+--pretrained-model	存放训练好的模型    
+--datasets	存放训练数据集和测试集
 --results		存在测试的结果图片   
 --training	存在训练过程中保存的log信息和模型  
 --codes	存放训练和测试的所有代码   
@@ -27,6 +27,6 @@
  ## 引用
  1. IMDN: https://github.com/Zheng222/IMDN  
  2. AIM2020: https://github.com/cszn/KAIR/blob/master/main_challenge_sr.py  
- 3. https://github.com/ChaofWang/Awesome-Super-Resolution  
- 4. https://github.com/z-x-yang/GCT  
- 5. https://github.com/huawei-noah/ghostnet
+ 3. SR Paper List: https://github.com/ChaofWang/Awesome-Super-Resolution  
+ 4. GCT: https://github.com/z-x-yang/GCT  
+ 5. GhostNet: https://github.com/huawei-noah/ghostnet
