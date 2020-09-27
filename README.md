@@ -6,6 +6,6 @@
 
 # 方案分享
 1. 数据处理：png图片的不做处理，jpg的GT和LR全部是使用cv2默认的插值，做2倍降采样  
-2. 网络设计：![image](https://github.com/zdyshine/RTC2020_EfficientSR/blob/master/net.jpg)
-
+2. 网络设计：![image](https://github.com/zdyshine/RTC2020_EfficientSR/blob/master/net.jpg)  
+3. 最终使用MSE 作为loss训练，追求极致的PSNR指标  
 
