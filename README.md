@@ -25,12 +25,8 @@
  * README.md 模型训练和测试的使用说明和环境配置说明<br>  
  
  ## 引用
-```javascript
-@inproceedings{yang2020gated,
-  title={Gated Channel Transformation for Visual Recognition},
-  author={Yang, Zongxin and Zhu, Linchao and Wu, Yu and Yang, Yi},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={11794--11803},
-  year={2020}
-}
-```
+ 1. IMDN: https://github.com/Zheng222/IMDN  
+ 2. AIM2020: https://github.com/cszn/KAIR/blob/master/main_challenge_sr.py  
+ 3. https://github.com/ChaofWang/Awesome-Super-Resolution  
+ 4. https://github.com/z-x-yang/GCT  
+ 5. https://github.com/huawei-noah/ghostnet
