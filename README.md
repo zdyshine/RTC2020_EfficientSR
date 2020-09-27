@@ -1,5 +1,5 @@
 ## RTC2020_EfficientSR FZU-CS510 冠军开源方案
-比赛链接：[link]https://www.dcjingsai.com/v2/cmptDetail.html?id=409  
+比赛链接: https://www.dcjingsai.com/v2/cmptDetail.html?id=409  
 比赛团队(Team)：FZU-CS510  
 比赛名次及得分：第一名，Score:10.22, PSNR: 9.512, SSIM: 0.317,Time: 0.399  
 感谢给力的楠哥。
@@ -23,3 +23,12 @@
  * train.py 训练模型的文件   
  * test.py 测试模型的文件    
  * README.md 模型训练和测试的使用说明和环境配置说明<br>  
+ 
+ ## 引用
+ @inproceedings{yang2020gated,
+  title={Gated Channel Transformation for Visual Recognition},
+  author={Yang, Zongxin and Zhu, Linchao and Wu, Yu and Yang, Yi},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={11794--11803},
+  year={2020}
+}
