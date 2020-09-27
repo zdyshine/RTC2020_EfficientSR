@@ -1,7 +1,7 @@
 ## RTC2020_EfficientSR FZU-CS510 冠军开源方案
 比赛链接: https://www.dcjingsai.com/v2/cmptDetail.html?id=409  
 比赛团队(Team)：FZU-CS510  
-比赛名次及得分：![image](https://github.com/zdyshine/RTC2020_EfficientSR/blob/master/net.jpg)  
+比赛名次及得分：![image](https://github.com/zdyshine/RTC2020_EfficientSR/blob/master/score.png)  
 感谢给力的楠哥。
 
 ## 方案分享
