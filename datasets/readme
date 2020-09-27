@@ -1,1 +1,6 @@
-存放训练数据集和测试集
+存放训练数据集和测试集  
+--test_data  
+--train_data  
+  * source_img  
+   * HR    
+   * LR   
