@@ -14,7 +14,7 @@
 文件夹的功能如下：  
 --pretrained-model	存放训练好的模型    
 --datasets	存放训练数据集和测试集
---results		存在测试的结果图片   
+--results		存在测试的结果图片     
 --training	存在训练过程中保存的log信息和模型  
 --codes	存放训练和测试的所有代码   
  * data 存放数据预处理和加载数据的相关代码   
