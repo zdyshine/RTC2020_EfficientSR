@@ -2,7 +2,7 @@
 比赛链接: https://www.dcjingsai.com/v2/cmptDetail.html?id=409  
 比赛团队(Team)：FZU-CS510  
 比赛名次及得分：![image](https://github.com/zdyshine/RTC2020_EfficientSR/blob/master/score.png)  
-团队成员：福州大学甘敏教授团队的博士生苏建楠，香港城市大学博士生诸汉炜，澳门大学的博士后研究员陈光永等
+团队成员：福州大学甘敏教授团队的博士生苏建楠，帝视科技张东阳，澳门大学的博士后研究员陈光永，香港城市大学博士生诸汉炜等  
 
 ## 方案分享
 1. 数据处理：png图片的不做处理，jpg的GT和LR全部是使用cv2默认的插值，做2倍降采样 (自己从test数据集找答案，或者讨论区交流)  
