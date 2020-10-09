@@ -31,3 +31,6 @@
  3. SR Paper List: https://github.com/ChaofWang/Awesome-Super-Resolution  
  4. GCT: https://github.com/z-x-yang/GCT  
  5. GhostNet: https://github.com/huawei-noah/ghostnet
+
+ ## 补充说明
+ 1.网络对输入的图片进行了一次降采样训练，在使用网络进行测试的时候需要保证输入的图片大小是偶数（可以使用padding操作）。
