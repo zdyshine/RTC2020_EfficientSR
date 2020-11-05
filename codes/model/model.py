@@ -9,6 +9,16 @@ class GCT(nn.Module):
     代码地址: https://github.com/z-x-yang/GCT
     '''
     def __init__(self, num_channels, epsilon=1e-5, mode='l2', after_relu=False):
+        """
+        Initialize the next channel.
+
+        Args:
+            self: (todo): write your description
+            num_channels: (int): write your description
+            epsilon: (float): write your description
+            mode: (todo): write your description
+            after_relu: (todo): write your description
+        """
         super(GCT, self).__init__()
 
         self.alpha = nn.Parameter(torch.ones(1, num_channels, 1, 1))
@@ -19,6 +29,13 @@ class GCT(nn.Module):
         self.after_relu = after_relu
 
     def forward(self, x):
+        """
+        Forward computation.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+        """
 
         if self.mode == 'l2':
             embedding = (x.pow(2).sum((2, 3), keepdim=True) + self.epsilon).pow(0.5) * self.alpha
@@ -54,6 +71,13 @@ def pixel_unshuffle(input, downscale_factor):
 
 class PixelUnshuffle(nn.Module):
     def __init__(self, downscale_factor):
+        """
+        Initialize the scale.
+
+        Args:
+            self: (todo): write your description
+            downscale_factor: (float): write your description
+        """
         super(PixelUnshuffle, self).__init__()
         self.downscale_factor = downscale_factor
     def forward(self, input):
@@ -66,12 +90,32 @@ class PixelUnshuffle(nn.Module):
         return pixel_unshuffle(input, self.downscale_factor)
 
 def conv_layer(in_channels, out_channels, kernel_size, stride=1, dilation=1, groups=1):
+    """
+    Layer layer.
+
+    Args:
+        in_channels: (int): write your description
+        out_channels: (int): write your description
+        kernel_size: (int): write your description
+        stride: (int): write your description
+        dilation: (str): write your description
+        groups: (array): write your description
+    """
     padding = int((kernel_size - 1) / 2) * dilation
     return nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding=padding, bias=True, dilation=dilation,
                      groups=groups)
 
 
 def activation(act_type, inplace=True, neg_slope=0.05, n_prelu=1):
+    """
+    Return activation activation layer.
+
+    Args:
+        act_type: (str): write your description
+        inplace: (bool): write your description
+        neg_slope: (todo): write your description
+        n_prelu: (int): write your description
+    """
     act_type = act_type.lower()
     if act_type == 'relu':
         layer = nn.ReLU(inplace)
@@ -85,6 +129,11 @@ def activation(act_type, inplace=True, neg_slope=0.05, n_prelu=1):
 
 
 def sequential(*args):
+    """
+    Return a list of submodule objects.
+
+    Args:
+    """
     modules = []
     for module in args:
         if isinstance(module, nn.Sequential):
@@ -97,15 +146,39 @@ def sequential(*args):
 
 class ShortcutBlock(nn.Module):
     def __init__(self, submodule):
+        """
+        Initialize a submodule.
+
+        Args:
+            self: (todo): write your description
+            submodule: (todo): write your description
+        """
         super(ShortcutBlock, self).__init__()
         self.sub = submodule
 
     def forward(self, x):
+        """
+        Forward function.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+        """
         output = x + self.sub(x)
         return output
 
 
 def pixelshuffle_block(in_channels, out_channels, upscale_factor=2, kernel_size=3, stride=1):
+    """
+    Pixelshuffle block.
+
+    Args:
+        in_channels: (int): write your description
+        out_channels: (str): write your description
+        upscale_factor: (float): write your description
+        kernel_size: (int): write your description
+        stride: (int): write your description
+    """
     conv = conv_layer(in_channels, out_channels * (upscale_factor ** 2), kernel_size, stride)
     pixel_shuffle = nn.PixelShuffle(upscale_factor)
     return sequential(conv, pixel_shuffle)
@@ -116,6 +189,14 @@ class IMDModule(nn.Module):
     FEDB: Feature Enhance Distill Block
     '''
     def __init__(self, in_channels, distillation_rate=0.25):
+        """
+        Initialize layer layer.
+
+        Args:
+            self: (todo): write your description
+            in_channels: (int): write your description
+            distillation_rate: (str): write your description
+        """
         super(IMDModule, self).__init__()
         self.distilled_channels = int(in_channels * distillation_rate) # 12 * 0.25 = 3
         self.remaining_channels = int(in_channels - self.distilled_channels) # 9
@@ -127,6 +208,13 @@ class IMDModule(nn.Module):
         self.gct = GCT(num_channels=30)
 
     def forward(self, input):
+        """
+        Perform forward computation.
+
+        Args:
+            self: (todo): write your description
+            input: (todo): write your description
+        """
         out_c1 = self.act(self.c1(input)) # 12 -> 48
         distilled_c1, remaining_c1 = torch.split(out_c1, (self.distilled_channels, 45), dim=1) # 3, 45
         out_c2 = self.act(self.c2(remaining_c1)) #  45 -> 33
@@ -140,6 +228,14 @@ class IMDModule(nn.Module):
 
 class IMDModule_So(nn.Module):
     def __init__(self, in_channels, distillation_rate=0.25):
+        """
+        Initialize layer layer.
+
+        Args:
+            self: (todo): write your description
+            in_channels: (int): write your description
+            distillation_rate: (str): write your description
+        """
         super(IMDModule_So, self).__init__()
         self.distilled_channels = int(in_channels * distillation_rate)
         self.remaining_channels = int(in_channels - self.distilled_channels)
@@ -150,6 +246,14 @@ class IMDModule_So(nn.Module):
         self.c5 = conv_layer(30, in_channels, 1)
 
     def forward(self, input, x_sobel):
+        """
+        Forward computation. forward.
+
+        Args:
+            self: (todo): write your description
+            input: (todo): write your description
+            x_sobel: (todo): write your description
+        """
         out_c1 = self.act(self.c1(input))
         distilled_c1, remaining_c1 = torch.split(out_c1, (self.distilled_channels, 24), dim=1)
         out_c2 = self.act(self.c2(remaining_c1))
@@ -166,6 +270,19 @@ class GhostModule(nn.Module):
     代码地址: https://github.com/huawei-noah/ghostnet
     '''
     def __init__(self, inp, oup, kernel_size=1, ratio=2, dw_size=3, stride=1, relu=True):
+        """
+        Initialize the layers.
+
+        Args:
+            self: (todo): write your description
+            inp: (int): write your description
+            oup: (int): write your description
+            kernel_size: (int): write your description
+            ratio: (todo): write your description
+            dw_size: (int): write your description
+            stride: (int): write your description
+            relu: (todo): write your description
+        """
         super(GhostModule, self).__init__()
         self.oup = oup
         init_channels = math.ceil(oup / ratio)
@@ -184,6 +301,13 @@ class GhostModule(nn.Module):
         )
 
     def forward(self, x):
+        """
+        Perform operation.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+        """
         x1 = self.primary_conv(x)
         x2 = self.cheap_operation(x1)
         out = torch.cat([x1,x2], dim=1)
@@ -191,10 +315,24 @@ class GhostModule(nn.Module):
 
 class SRB(nn.Module):
     def __init__(self, nf):
+        """
+        Initialize layer
+
+        Args:
+            self: (todo): write your description
+            nf: (todo): write your description
+        """
         super(SRB, self).__init__()
         self.c = conv_layer(nf, nf, 3)
         self.act = activation('lrelu', neg_slope=0.05)
     def forward(self, x):
+        """
+        Forward computation.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+        """
         return self.act(x + self.c(x))
 
 
@@ -203,6 +341,15 @@ class SESF(nn.Module):
     AIM 2020 Efficient SR
     '''
     def __init__(self, nf=12, squeeze=9, expand=128):
+        """
+        Initialize the network.
+
+        Args:
+            self: (todo): write your description
+            nf: (todo): write your description
+            squeeze: (str): write your description
+            expand: (todo): write your description
+        """
         super(SESF, self).__init__()
         assert expand - squeeze > 12, 'channel error expand - squeeze should > 12 '
         self.remaining_channels = expand - nf * 2 # 104
@@ -215,6 +362,14 @@ class SESF(nn.Module):
         self.act = activation('lrelu', neg_slope=0.05)
 
     def forward(self, x, x_xobel):
+        """
+        Forward computation.
+
+        Args:
+            self: (todo): write your description
+            x: (todo): write your description
+            x_xobel: (todo): write your description
+        """
         out_c1 = self.act(self.c1(x)) # 12 -> 128
         distilled_c1, remaining_c1 = torch.split(out_c1, (self.distilled_channels, self.remaining_channels), dim=1) # 24, 104
         out_c1 = self.c2_1(remaining_c1) # 9 out
@@ -226,6 +381,17 @@ class SESF(nn.Module):
 
 class model_rtc(nn.Module):
     def __init__(self, upscale=2, in_nc=3, nf=12, num_modules=4, out_nc=3):
+        """
+        Initialize the layer.
+
+        Args:
+            self: (todo): write your description
+            upscale: (float): write your description
+            in_nc: (int): write your description
+            nf: (todo): write your description
+            num_modules: (int): write your description
+            out_nc: (str): write your description
+        """
         super(model_rtc, self).__init__()
 
         self.fea_conv = conv_layer(nf, nf, kernel_size=3)

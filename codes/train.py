@@ -140,6 +140,12 @@ optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
 
 def train(epoch):
+    """
+    Training function.
+
+    Args:
+        epoch: (int): write your description
+    """
     model.train()
     utils.adjust_learning_rate(optimizer, epoch, args.step_size, args.lr, args.gamma)
     print('epoch =', epoch, 'lr = ', optimizer.param_groups[0]['lr'])
@@ -162,6 +168,11 @@ def train(epoch):
 
 
 def valid():
+    """
+    Validate the model.
+
+    Args:
+    """
     model.eval()
 
     avg_psnr, avg_ssim = 0, 0
@@ -191,6 +202,12 @@ def valid():
 
 
 def save_checkpoint(epoch):
+    """
+    Save model checkpoint to disk.
+
+    Args:
+        epoch: (int): write your description
+    """
     model_folder = "../training/"
     model_out_path = model_folder + "epoch_{}.pth".format(epoch + args.save_epoch_bias)
     if not os.path.exists(model_folder):
@@ -199,6 +216,12 @@ def save_checkpoint(epoch):
     print("===> Checkpoint saved to {}".format(model_out_path))
 
 def print_network(net):
+    """
+    Prints a network.
+
+    Args:
+        net: (todo): write your description
+    """
     num_params = 0
     for param in net.parameters():
         num_params += param.numel()
